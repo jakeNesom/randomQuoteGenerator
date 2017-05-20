@@ -1,16 +1,25 @@
 <div class="row" style="min-height:75px;"></div>
 <div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
+    <div class="col-sm-8 col-sm-offset-2" >
         <div class="panel panel-default ">
-        <div class="panel-body">
-            <h2> <span style="font-size:66px">"</span> <span [innerHTML]="quoteReceived[0].content"> </span>  </h2>
-            <h4 style="margin-top: 5%;" class="pull-right"> {{quoteReceived[0].title}}</h4>
-        </div>  
-        <div class="panel-footer">
-            <!-- https://dev.twitter.com/web/tweet-button -->
-            <div class="btn btn-primary btn-md" style="background-color:grey" (click)="getNewQuote()">Get Quote</div>
-                <a href="https://twitter.com/share" class="btn btn-primary btn-md twitter-share-button" data-show-count="false">Tweet</a>
-                <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <div class="panel-body" style="height:300px; margin:40px;">
+                <div [@fade]="clicked">
+                    <div [style.font-size]="fontSize + 'px'"> <span style="font-size:66px">"</span> <span [innerHTML]="quoteReceived[0].content"> </span>  </div>
+                    <h4 style="margin-top: 5%;" class="pull-right"> {{quoteReceived[0].title}}</h4>
+                </div>
+            </div>  
+            <div class="panel-footer">
+                <!-- https://dev.twitter.com/web/tweet-button -->
+                <span class="pull-right">
+                    <div class="btn btn-success btn-md" [disabled]="clicked == true" (click)="getNewQuote()">Get Quote</div>
+                    <a href="https://twitter.com/share" 
+                            class="btn btn-primary btn-md twitter-share-button fa fa-twitter fa-2x" 
+                            data-show-count="false"
+                            style="padding:5.5px 15px;" ></a>
+                        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    
+                </span>
+                <div class="clearfix"></div>
             </div>
         </div>
     </div>

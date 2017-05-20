@@ -2,6 +2,7 @@
 import { HttpModule } from '@angular/http';
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 //Services
 import { QuoteService } from './services/quote.service';
@@ -10,7 +11,8 @@ import { QuoteService } from './services/quote.service';
 import { AppComponent }  from './app.component';
 
 @NgModule({
-  imports:      [ BrowserModule, HttpModule ],
+  imports:      [ BrowserModule, HttpModule, 
+                  BrowserAnimationsModule ],
   declarations: [ AppComponent ],
   bootstrap:    [ AppComponent ],
   providers: [ QuoteService ]
