@@ -6,8 +6,8 @@ import 'rxjs/add/operator/toPromise';
 
 
 @Injectable ()
-export class quoteService {
-    private quoteApiUrl = 'https://talaikis.com/api/quotes/random/';
+export class QuoteService {
+    private quoteApiUrl = 'http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1';
 
     constructor(private http: Http) {}
 
@@ -15,7 +15,7 @@ export class quoteService {
 
         return this.http.get(this.quoteApiUrl)
             .toPromise()
-            .then(response => response.json().data)
+            .then(response => response.json())
             .catch(this.handleError);
     }
     private handleError(error:any): Promise <any> {

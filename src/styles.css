@@ -3,3 +3,17 @@ h1 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 250%;
 }
+
+body {
+   
+    width:100%;
+    
+}
+
+.wrapper {
+  width:100%;
+  background-color: grey;
+  background: url("http://localhost:3000/app/assets/forest-background-md.png") center no-repeat;
+  height:100vh;
+  
+}

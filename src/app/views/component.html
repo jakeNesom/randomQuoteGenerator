@@ -1,1 +1,8 @@
-<h1>Hello {{name}}</h1>
+<div class="wrapper">
+    <h1>quote:</h1>
+    <h2 [innerHTML]="quoteReceived[0].content">  </h2>
+    <h3> {{quoteReceived[0].title}}</h3>
+    <button style="background-color:grey" (click)="getNewQuote()">Get Quote</button>
+    <button><a href="https://twitter.com/share" class="twitter-share-button" data-show-count="false">Tweet</a></button>
+    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
