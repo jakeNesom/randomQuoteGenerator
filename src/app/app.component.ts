@@ -8,27 +8,39 @@ import { QuoteService } from './services/quote.service';
   templateUrl: 'app/views/component.html',
   styleUrls: [ 'app/css/component.css'],
   animations: [
-    trigger('fade', [
-      state('0', style({
-        backgroundColor: '#eee',
-        transform: 'scale(1)'
+    trigger('fadeOut', [
+      state('rest', style({
+        opacity: '100'
       })),
-      state('1',   style({
-        backgroundColor: '#cfd8dc',
-        transform: 'scale(1.1)'
+      state('out',   style({
+        opacity: '0'
       })),
-      transition('0 => 1', animate('100ms ease-in')),
-      transition('1 => 0', animate('100ms ease-out'))
+      state('set', style({
+        opacity: '100'
+      })),
+      transition('rest => out', [ 
+        animate('1s', style({opacity: '0'}))
+      ]),
+      transition('out => set', [ 
+        animate('1s', style({opacity: '100'}))
+      ]),
+      transition('set => out', [ 
+        animate('1s', style({opacity: '0'}))
+      ]),
+
     ])
+    
   ]
 })
 export class AppComponent  { 
   
   constructor(public quoteService: QuoteService ) {}
-  public clicked: boolean = false;
+  public clicked: "out" | "set" | "in" | "rest" = "rest";
   public quoteReceived: Object;
+  public newQuote: Object;
   public fontSize:number = 30;
-  public testQuote: Object = [ 
+  public tqCounter = 0;
+  public testQuote: any = [ 
     { 
       "ID": 2130, 
       "title": "Tom Bissel", 
@@ -36,9 +48,91 @@ export class AppComponent  {
       "link": "https://quotesondesign.com/tom-bissel/", 
       "custom_meta": { 
         "Source": "<a href=\"http://www.brainpickings.org/index.php/2012/04/13/magic-hours-tom-bissell/\">article</a>" 
-      } 
-    }
-    ];
+      }
+    },
+    { 
+      "ID": 1234, 
+      "title": "Bill Gates", 
+      "content": "<p>If you can't make it good, at least make it look good.</p>", 
+      "link": "https://quotesondesign.com/tom-bissel/", 
+      "custom_meta": { 
+        "Source": "<a href=\"http://www.brainpickings.org/index.php/2012/04/13/magic-hours-tom-bissell/\">article</a>" 
+      }
+    },
+    { 
+      "ID": 1234, 
+      "title": "Thomas Hardy", 
+      "content": "<p>Fear is the mother of foresight</p>", 
+      "link": "https://quotesondesign.com/tom-bissel/", 
+      "custom_meta": { 
+        "Source": "<a href=\"http://www.brainpickings.org/index.php/2012/04/13/magic-hours-tom-bissell/\">article</a>" 
+      }
+    },
+    { 
+      "ID": 1234, 
+      "title": "Barack Obama", 
+      "content": "<p>If you're walking down the right path and you're willing to keep walking, eventually you'll make progress.</p>", 
+      "link": "https://quotesondesign.com/tom-bissel/", 
+      "custom_meta": { 
+        "Source": "<a href=\"http://www.brainpickings.org/index.php/2012/04/13/magic-hours-tom-bissell/\">article</a>" 
+      }
+    },
+    { 
+      "ID": 1234, 
+      "title": "Malcolm X", 
+      "content": "<p>I'm for truth, no matter who tells it.  I'm for justice, no matter who it's for or against.</p>", 
+      "link": "https://quotesondesign.com/tom-bissel/", 
+      "custom_meta": { 
+        "Source": "<a href=\"http://www.brainpickings.org/index.php/2012/04/13/magic-hours-tom-bissell/\">article</a>" 
+      }
+    },
+    { 
+      "ID": 1234, 
+      "title": "Plato", 
+      "content": "<p>If a man neglects education, he walks lame to the end of his life.</p>", 
+      "link": "https://quotesondesign.com/tom-bissel/", 
+      "custom_meta": { 
+        "Source": "<a href=\"http://www.brainpickings.org/index.php/2012/04/13/magic-hours-tom-bissell/\">article</a>" 
+      }
+    },
+    { 
+      "ID": 1234, 
+      "title": "", 
+      "content": "<p></p>", 
+      "link": "https://quotesondesign.com/tom-bissel/", 
+      "custom_meta": { 
+        "Source": "<a href=\"http://www.brainpickings.org/index.php/2012/04/13/magic-hours-tom-bissell/\">article</a>" 
+      }
+    },
+    { 
+      "ID": 1234, 
+      "title": "", 
+      "content": "<p></p>", 
+      "link": "https://quotesondesign.com/tom-bissel/", 
+      "custom_meta": { 
+        "Source": "<a href=\"http://www.brainpickings.org/index.php/2012/04/13/magic-hours-tom-bissell/\">article</a>" 
+      }
+    },
+    { 
+      "ID": 1234, 
+      "title": "", 
+      "content": "<p></p>", 
+      "link": "https://quotesondesign.com/tom-bissel/", 
+      "custom_meta": { 
+        "Source": "<a href=\"http://www.brainpickings.org/index.php/2012/04/13/magic-hours-tom-bissell/\">article</a>" 
+      }
+    },
+    { 
+      "ID": 1234, 
+      "title": "", 
+      "content": "<p></p>", 
+      "link": "https://quotesondesign.com/tom-bissel/", 
+      "custom_meta": { 
+        "Source": "<a href=\"http://www.brainpickings.org/index.php/2012/04/13/magic-hours-tom-bissell/\">article</a>" 
+      }
+    },
+    
+  ];
   ngOnInit() { 
     //this.getQuote()
 
@@ -46,21 +140,48 @@ export class AppComponent  {
     this.setQuote(this.testQuote);
   }
 
-  getQuote () { 
+  getQuote (changeState?:"set") { 
+
     var quote;
-    this.quoteService.getQuote()
+    if( this.tqCounter < this.testQuote.length - 1 && changeState == "set")
+    { 
+      this.tqCounter ++;
+      quote = this.testQuote[this.tqCounter];
+      let quoteArr = [quote];
+      this.setQuote(quoteArr, changeState);
+      
+    }
+    else if (changeState == "set")
+    {
+      this.quoteService.getQuote()
       .then(
-        quote => this.setQuote(quote),
+        quote => this.setQuote(quote, changeState),
         error => console.log(error)
       );
-    
+    } else {
+      this.quoteService.getQuote()
+        .then(
+          quote => this.setQuote(quote),
+          error => console.log(error)
+        );
+    }
   }
 
   getNewQuote() {
-    this.getQuote();
+    if(this.quoteReceived && this.newQuote)
+    {
+      if(this.quoteReceived[0].title !== this.newQuote[0].title )
+      {
+        this.setQuote(this.newQuote);
+      }
+      this.getQuote();
+    }
+    
   }
-  setQuote (quote:any) {
-    this.toggleClicked();
+
+
+  setQuote (quote:any, changeState?:"set") {
+    
     let length = quote[0].content.length;
     if(length > 250 ) { this.getQuote();}
     else {
@@ -70,17 +191,19 @@ export class AppComponent  {
       else  { this.fontSize = 30; }
 
       this.quoteReceived = quote;
+      if(changeState == "set") { this.clicked = "set";}
     }
   }
 
   toggleClicked() {
-    if(this.clicked == false) { 
+    
+    if(this.clicked == "rest" || this.clicked == "set") { 
       let _this = this;
-      this.clicked = true;
-
-      setTimeout(function() {
-        this.clicked = false;
-      }, 5000);
+      this.clicked = "out";
+      setTimeout(function(){
+        _this.getQuote("set");
+      }, 2500)
+      
     }
   }
 }

@@ -3,3 +3,14 @@
     
     
 }
+
+#quotation { 
+    --yPosition:-20;
+    
+    font-size: 66px;
+    display:inline;
+    -ms-transform: translate(0,var(0,--yPosition)); /* IE 9 */
+    -webkit-transform: translate(0,--yPosition); /* Chrome, Safari, Opera */
+    transform: translate(0,--yPosition);
+
+}
