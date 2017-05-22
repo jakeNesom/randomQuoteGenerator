@@ -94,44 +94,7 @@ export class AppComponent  {
       "custom_meta": { 
         "Source": "<a href=\"http://www.brainpickings.org/index.php/2012/04/13/magic-hours-tom-bissell/\">article</a>" 
       }
-    },
-    { 
-      "ID": 1234, 
-      "title": "", 
-      "content": "<p></p>", 
-      "link": "https://quotesondesign.com/tom-bissel/", 
-      "custom_meta": { 
-        "Source": "<a href=\"http://www.brainpickings.org/index.php/2012/04/13/magic-hours-tom-bissell/\">article</a>" 
-      }
-    },
-    { 
-      "ID": 1234, 
-      "title": "", 
-      "content": "<p></p>", 
-      "link": "https://quotesondesign.com/tom-bissel/", 
-      "custom_meta": { 
-        "Source": "<a href=\"http://www.brainpickings.org/index.php/2012/04/13/magic-hours-tom-bissell/\">article</a>" 
-      }
-    },
-    { 
-      "ID": 1234, 
-      "title": "", 
-      "content": "<p></p>", 
-      "link": "https://quotesondesign.com/tom-bissel/", 
-      "custom_meta": { 
-        "Source": "<a href=\"http://www.brainpickings.org/index.php/2012/04/13/magic-hours-tom-bissell/\">article</a>" 
-      }
-    },
-    { 
-      "ID": 1234, 
-      "title": "", 
-      "content": "<p></p>", 
-      "link": "https://quotesondesign.com/tom-bissel/", 
-      "custom_meta": { 
-        "Source": "<a href=\"http://www.brainpickings.org/index.php/2012/04/13/magic-hours-tom-bissell/\">article</a>" 
-      }
-    },
-    
+    },   
   ];
   ngOnInit() { 
     //this.getQuote()
